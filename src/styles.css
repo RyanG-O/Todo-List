@@ -1,0 +1,68 @@
+:root {
+    --sidebar-color: #000000;
+    --text-color: #E5E5E5;
+    --bg-color: #FFFFFF;
+    --border-color: #14213D;
+    --highlight-color: #FCA311;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+}
+
+/* -------- sidebar -------- */
+
+#sidebar {
+    height: 100%;
+    background-color: var(--sidebar-color);
+    position: fixed;
+    width: 20%;
+    padding: 25px;
+}
+
+#sidebar a {
+    text-decoration: none;
+    color: var(--highlight-color);
+    display: block;
+    font-size: 2rem;
+    line-height: 2.5rem;
+}
+
+#sidebar a:hover {
+    color: var(--text-color);
+}
+
+/* -------- main content -------- */
+
+#content {
+    margin-left: 20%;
+    padding: 10px 50px;
+    background-color: var(--bg-color);
+    width: 100%;
+}
+
+#add-button {
+    border-radius: 50%;
+    height: 75px;
+    width: 75px;
+    background-color: var(--highlight-color);
+    border-color: var(--sidebar-color);
+    border-style: solid;
+    color: var(--sidebar-color);
+    position: absolute;
+    bottom: 30px;
+    right: 30px;
+    font-size: 2.5rem;
+}
+
+#add-button:hover{
+    cursor: pointer;
+    color: var(--text-color);
+    border-color: var(--border-color);
+}
