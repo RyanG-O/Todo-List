@@ -1,9 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+
 :root {
     --sidebar-color: #000000;
     --text-color: #E5E5E5;
     --bg-color: #FFFFFF;
     --border-color: #14213D;
     --highlight-color: #FCA311;
+    font-family: 'Roboto', system-ui;
 }
 
 * {
@@ -22,8 +25,11 @@ body {
     height: 100%;
     background-color: var(--sidebar-color);
     position: fixed;
-    width: 20%;
-    padding: 25px;
+    width: 30%;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 }
 
 #sidebar a {
@@ -38,13 +44,66 @@ body {
     color: var(--text-color);
 }
 
+#sidebar hr {
+    border-color: var(--highlight-color);
+}
+
 /* -------- main content -------- */
 
 #content {
-    margin-left: 20%;
+    margin-left: 30%;
     padding: 10px 50px;
     background-color: var(--bg-color);
     width: 100%;
+}
+
+.title {
+    padding: 10px 0px;
+}
+
+.project-title {
+    padding: 30px 0px 10px 0px;
+}
+
+.project hr {
+    margin: 10px 15px;
+    border-style: dotted;
+}
+
+.todo {
+    padding: 5px 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.todo:hover {
+    background-color: var(--text-color);
+}
+
+.todo > div > p:last-child {
+    font-size: 0.8rem;
+}
+
+.todo-button {
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+    border: var(--sidebar-color) solid 1px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.todo-button:hover {
+    cursor: pointer;
+}
+
+.todo-button div {
+    width: 60%;
+    height: 60%;
+    background-color: var(--sidebar-color);
+    border-radius: 50%;
 }
 
 #add-button {
