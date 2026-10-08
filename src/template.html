@@ -7,36 +7,65 @@
 </head>
 <body>
     <div id="sidebar">
-        <a href="#"><i class="fa-solid fa-calendar"></i> Today</a>
+        <a href="#" class="sidebar-element" id="today-button"><i class="fa-solid fa-calendar"></i> Today</a>
         <hr>
-        <a href="#"><i class="fa-solid fa-house"></i> Home</a>
+        <a href="#" class="sidebar-element" id="home-button"><i class="fa-solid fa-house"></i> Home</a>
         <hr>
-        <a href="#"><i class="fa-solid fa-diagram-project"></i> Projects</a>
+        <div id="projects-sidebar">
+            <a href="#" class="no-pointer" id="projects-button"><i class="fa-solid fa-diagram-project"></i> Projects</a>
+            <button id="create-project">+</button>
+        </div>
+        <hr>
+        <div class="sidebar-element sidebar-project"><a href="#">Hello</a></div>
     </div>
     <div id="content">
-        <h1 class="title">Todo</h1>
-        <hr>
-        <div class="project">
-            <h2 class="project-title">Project</h2>
-            <div class="todo">
-                <button class="todo-button"></button>
-                <div>
-                    <p class="description">Walk the dog</p>
-                    <p><i class="fa-solid fa-calendar-days"></i>Date</p>
-                </div>
-            </div>
+        <div id="home">
+            <h1 class="title">Todo</h1>
             <hr>
-            <div class="todo">
-                <button class="todo-button">
-                    <div></div>
-                </button>
-                <div>
-                    <p class="description">Walk the dog</p>
-                    <p class="date"><i class="fa-solid fa-calendar-days"></i>Date</p>
+            <div class="project">
+                <h2 class="project-title">Project</h2>
+                <div class="todo">
+                    <button class="todo-button"></button>
+                    <div>
+                        <p class="description">Walk the dog</p>
+                        <p><i class="fa-solid fa-calendar-days"></i>Date</p>
+                    </div>
+                </div>
+                <hr>
+                <div class="todo">
+                    <button class="todo-button"></button>
+                    <div>
+                        <p class="description">Walk the dog</p>
+                        <p class="date"><i class="fa-solid fa-calendar-days"></i>Date</p>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-    <button id="add-button">+</button>
+    <button id="add-button" command="show-modal" commandfor="add-todo">+</button>
+    <dialog id="add-todo" closedby="any">
+        <form id="todo-form">
+            <div id="form-text">
+                <input id="title" name="title" placeholder="Title" required>
+                <hr>
+                <textarea id="description" name="description" placeholder="Description"></textarea>
+            </div>
+            <div id="form-buttons">
+                <select id="projects" name="projects">
+                    
+                </select>
+                <select id="priority" name="priority" required>
+                    <option value="" selected disabled>Priority</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                </select>
+                <input id="date" name="date" type="date">
+                <button type="submit">Create</button>
+                <button type="button" id="cancel-todo">Cancel</button>
+            </div>
+        </form>
+    </dialog>
 </body>
 </html>

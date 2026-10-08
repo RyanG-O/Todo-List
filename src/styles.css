@@ -6,6 +6,8 @@
     --bg-color: #FFFFFF;
     --border-color: #14213D;
     --highlight-color: #FCA311;
+    --modal-bg-color: #3a3a3a;
+    --modal-input-color: #626262;
     font-family: 'Roboto', system-ui;
 }
 
@@ -13,6 +15,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: inherit;
 }
 
 body {
@@ -32,7 +35,12 @@ body {
     gap: 20px;
 }
 
-#sidebar a {
+#sidebar > i {
+    color: var(--highlight-color);
+}
+
+.sidebar-element, 
+#projects-button {
     text-decoration: none;
     color: var(--highlight-color);
     display: block;
@@ -40,12 +48,80 @@ body {
     line-height: 2.5rem;
 }
 
-#sidebar a:hover {
+.sidebar-element:hover {
     color: var(--text-color);
+}
+
+.no-pointer {
+    cursor: default;
 }
 
 #sidebar hr {
     border-color: var(--highlight-color);
+}
+
+#projects-sidebar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#create-project {
+    background: none;
+    color: var(--highlight-color);
+    border: solid var(--highlight-color) 2px;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    font-size: 1.3rem;
+    cursor: pointer;
+    margin-right: 3%;
+}
+
+#create-project:hover {
+    color: var(--text-color);
+    border-color: var(--text-color);
+}
+
+#project-input {
+    border: none;
+    background-color: var(--modal-bg-color);
+    color: var(--highlight-color);
+    padding: 10px;
+    border-radius: 10px;
+    font-size: 1.6rem;
+    margin-left: 6%;
+}
+
+#project-input:focus {
+    outline: none;
+}
+
+#projects-sidebar + hr {
+    border: none;
+    border-top: dotted var(--highlight-color) 2px;
+}
+
+.sidebar-project {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-left: 5%;
+}
+
+.sidebar-content {
+    font-size: 1.8rem;
+    margin: 0 10px;
+}
+
+.sidebar-icon {
+    color: var(--highlight-color);
+    margin-right: 3%;
+}
+
+.sidebar-icon:hover {
+    color: var(--text-color);
+    cursor: pointer;
 }
 
 /* -------- main content -------- */
@@ -59,6 +135,10 @@ body {
 
 .title {
     padding: 10px 0px;
+}
+
+.title + hr {
+    margin-bottom: 10px;
 }
 
 .project-title {
@@ -75,6 +155,7 @@ body {
     display: flex;
     align-items: center;
     gap: 10px;
+    transition: opacity 0.4s ease;
 }
 
 .todo:hover {
@@ -99,6 +180,10 @@ body {
     cursor: pointer;
 }
 
+.todo.transition-delete {
+    opacity: 0;
+}
+
 .todo-button div {
     width: 60%;
     height: 60%;
@@ -114,7 +199,7 @@ body {
     border-color: var(--sidebar-color);
     border-style: solid;
     color: var(--sidebar-color);
-    position: absolute;
+    position: fixed;
     bottom: 30px;
     right: 30px;
     font-size: 2.5rem;
@@ -124,4 +209,74 @@ body {
     cursor: pointer;
     color: var(--text-color);
     border-color: var(--border-color);
+}
+
+/* -------- modals -------- */
+
+#add-todo {
+    margin: auto;
+    height: 700px;
+    width: 700px;
+    background-color: var(--modal-bg-color);
+    border-radius: 20px;
+    padding: 40px 50px;
+}
+
+#todo-form {
+    height: 600px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+#form-text {
+    display: flex;
+    flex-direction: column;
+}
+
+#title, 
+#description {
+    background-color: var(--modal-input-color);
+    color: white;
+    border: none;
+}
+
+#title:focus,
+#description:focus {
+    outline: none;
+}
+
+#title {
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    height: 50px;
+    font-size: 2rem;
+    padding: 40px 30px;
+}
+
+#description {
+    border-bottom-right-radius: 20px;
+    border-bottom-left-radius: 20px;
+    resize: none;
+    height: 450px;
+    font-size: 1.3rem;
+    padding: 20px 30px;
+}
+
+#form-buttons {
+    display: flex;
+    justify-content: space-between;
+}
+
+form select,
+form button,
+form input[type="date"] {
+    outline: none;
+    background-color: var(--modal-input-color);
+    border: none;
+    color: white;
+    padding: 10px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 1.3rem;
 }
