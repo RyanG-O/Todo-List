@@ -36,8 +36,6 @@ class TodoList {
 
 export default (function(){
 
-    const defaultProject = new TodoList("Default");
-
     const inbox = new TodoList('Inbox');
 
     // holds all projects
@@ -46,22 +44,22 @@ export default (function(){
     // creates a project
     function createProject(name){
         const project = new TodoList(name);
-        this.projects.push(project);
+        projects.push(project);
     }
 
     // creates a todo instance and adds it to the default list and its project if it has one
     function createTodo(title, description, dueDate, priority, projectName){
         const todo = new Todo(title, description, dueDate, priority, projectName);
-        this.projects.filter(project => project.name === todo.projectName).forEach((project) => {
+        projects.filter(project => project.name === todo.projectName).forEach((project) => {
             project.list.push(todo);
         });
     }
 
     // updates a todo instance given its id
     function updateTodo(id, title, description, dueDate, priority, projectName){
-        const todo = this.projects.find(project => {
-            project.list.some(todo => todo.id == id);
-        }).list.find(todo => todo.id == id);
+        const todo = projects.find(project => {
+            return project.list.some(todo => todo.id === id);
+        }).list.find(todo => todo.id === id);
 
         todo.title = title;
         todo.description = description;
@@ -72,19 +70,19 @@ export default (function(){
 
     // deletes a todo instance from the default list and its project if it has one based on id
     function deleteTodo(id){
-        this.projects.forEach(project => project.deleteTodo(id));
+        projects.forEach(project => project.deleteTodo(id));
     }
 
     // deletes a project and all todo instances associated with it
     function deleteProject(projectName){
-        this.projects = this.projects.filter(project => project.name !== projectName);
-        this.projects[0].list.filter(todo => todo.projectName !== projectName);
+        projects = projects.filter(project => project.name !== projectName);
+        projects[0].list.filter(todo => todo.projectName !== projectName);
     }
 
     // returns a project with all todos for today
     function getTodosByDate(date){
         const dayProject = new TodoList('day');
-        this.projects.forEach(project => {
+        projects.forEach(project => {
             project.list.forEach(todo => {
                 if (isSameDay(todo.dueDate, date)) {
                     dayProject.addTodo(todo);
@@ -96,7 +94,8 @@ export default (function(){
 
     // stores all information through local storage
     function storeLocal(){
-        const jsonStore = JSON.stringify(this.projects);
+        console.log(projects);
+        const jsonStore = JSON.stringify(projects);
         //console.log("storeLocal: ");
         //console.log(jsonStore);
         localStorage.setItem('projects', jsonStore);
@@ -105,10 +104,12 @@ export default (function(){
     // retrieves all information through local storage
     function retrieveLocal(){
         const jsonStore = JSON.parse(localStorage.getItem('projects'));
+        console.log(projects);
+        if (jsonStore === null) return;
         //console.log("retrieveLocal: ");
-        this.projects = jsonStore;
-        this.projects.forEach(project => Object.setPrototypeOf(project, TodoList.prototype));
-        this.projects.forEach(project => project.list.forEach(todo => todo.dueDate = new Date(todo.dueDate)));
+        projects = jsonStore;
+        projects.forEach(project => Object.setPrototypeOf(project, TodoList.prototype));
+        projects.forEach(project => project.list.forEach(todo => todo.dueDate = new Date(todo.dueDate)));
         //console.log(this.projects);
     }
 
@@ -132,6 +133,6 @@ export default (function(){
         }
       }
 
-    return {createProject, createTodo, deleteTodo, deleteProject, updateTodo, getTodosByDate, storeLocal, retrieveLocal, storageAvailable, projects};
+    return {createProject, createTodo, deleteTodo, deleteProject, updateTodo, getTodosByDate, storeLocal, retrieveLocal, storageAvailable, get projects() {return projects;}};
 
 })();

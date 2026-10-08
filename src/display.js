@@ -45,6 +45,8 @@ export default (function(){
                     case 1:
                         renderToday();
                         break;
+                    default: 
+                        renderProject(state);
                 }
             }
         });
@@ -259,6 +261,8 @@ export default (function(){
                 case 1:
                     renderToday();
                     break;
+                default:
+                    renderProject(state);
             }
 
             document.getElementById('add-todo').close();
